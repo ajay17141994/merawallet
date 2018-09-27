@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+
+<html lang="en" class="full-height">
+                
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Mera Wallet</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/index.css" rel="stylesheet"> 
+    <!-- google map api for google map and location search goes here -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBCEB4fn5r8QliZC4vmFlIUxGfN7MZ5eLs&libraries=places&callback=initAutocomplete" type="text/javascript"></script>
+    <!-- google map api for google map and location search ends here -->
+    <script>
+        function initAutocomplete() 
+            {
+            
+                var geocoder = new google.maps.Geocoder();
+                var input = document.getElementById('placename');
+                var searchBox = new google.maps.places.SearchBox(input);
+                searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+
+                
+                googleLatLng = new google.maps.LatLng(searchBox.getPlaces()['0'].geometry.location.lat(), searchBox.getPlaces()['0'].geometry.location.lng());
+                        mymap.setCenter(googleLatLng);
+                var marker = new google.maps.Marker({
+                    position: googleLatLng,
+                    icon: "img/markers/placeholder20.png"
+                });
+                marker.setMap(mymap);
+                     markers.push(marker);//pussing data in markers array.........
+                if (places.length == 0) {
+                    return;
+                }
+                google.maps.event.trigger(mymap, "resize");
+                            var bounds = new google.maps.LatLngBounds();
+                            bounds.extend(googleLatLng);
+                            mymap.fitBounds(bounds);
+            });
+            } // retrieving search box places google function goes here.......
+
+
+</script>
+<script type="text/javascript">
+  testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+    		       'BlackBerry|Windows Phone|'  +
+    		       'Opera Mini|IEMobile|Mobile' , 
+    		      'i');
+  
+  if (testExp.test(navigator.userAgent))
+               alert("Your device is a Mobile Device");
+               
+
+  else{
+            //    alert("Your device is NOT a Mobile Device");
+            //    alert(navigator.appCodeName);
+            //    alert(navigator.appName);
+            //    alert(navigator.appVersion);
+            //    alert(navigator.geolocation);
+            //    alert(navigator.language);
+            //    alert(navigator.onLine);
+            //    alert(navigator.platform);
+            //    alert(navigator.product);
+            //    alert(navigator.userAgent);
+  }
+     			 
+</script>
+<script type="text/javascript">
+
+window.onload = userAgentDetect;
+function userAgentDetect() {
+  if(window.navigator.userAgent.match(/Mobile/i)
+  || window.navigator.userAgent.match(/iPhone/i)
+  || window.navigator.userAgent.match(/iPod/i)
+  || window.navigator.userAgent.match(/IEMobile/i)
+  || window.navigator.userAgent.match(/Windows Phone/i)
+  || window.navigator.userAgent.match(/Android/i)
+  || window.navigator.userAgent.match(/BlackBerry/i)
+  || window.navigator.userAgent.match(/webOS/i)) {
+    // document.body.className += ' mobile';
+    alert('True - Mobile - ' + navigator.userAgent);
+  } else {
+    alert('False - Mobile - ' + navigator.userAgent);
+  }
+  if(window.navigator.userAgent.match(/Tablet/i)
+  || window.navigator.userAgent.match(/iPad/i)
+  || window.navigator.userAgent.match(/Nexus 7/i)
+  || window.navigator.userAgent.match(/Nexus 10/i)
+  || window.navigator.userAgent.match(/KFAPWI/i)) {
+    // document.body.className -= ' mobile';
+    // document.body.className += ' tablet';
+    alert('True - Tablet - ' + navigator.userAgent);
+  } else {
+    alert('False - Tablet - ' + navigator.userAgent);
+  }
+}
+
+</script>
+
+     <style>
+ .msg {
+    display: none;
+}
+.error {
+    color: red;
+}
+.success {
+    color: green;
+} 
+
+ .mobilemsg {
+    display: none;
+}
+.mobileerror {
+    color: red;
+}
+.mobilesuccess {
+    color: green;
+} 
+.info{
+    color:orange;
+}
+body.modal-open homepage{
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+.modal-backdrop
+{
+    opacity:0.5 !important;
+}
+.modal-backdrop.in {
+	opacity: 0.9;
+}
+</style>
+ 
+<body ng-app="meraWallet_index">
+    <homepage>
+    <!--Main Navigation-->
+    <header>
+    
+        <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#"><strong>Mera <b><span style="color:#ff0080">wallet</span></b></strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                <ul class="navbar-nav mr-auto">
+                   <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        Pay 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100vw;background: #42474E;">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%; ">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/jio.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/airtel.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/statebank.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        Send Money
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100vw;background: #42474E;">
+                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%; ">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/jio.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/airtel.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/statebank.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        Accept Payment
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100vw;background: #42474E;">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%; ">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/jio.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/airtel.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/statebank.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        Add Money
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100vw;background: #42474E;">
+                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%; ">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/jio.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/airtel.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/ola3.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/phonepee.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalLoginAvatar" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/statebank.png" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                        Mera Book
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="width:100vw;background: #42474E;">
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalpassbook" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/passbook2.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-toggle="modal" data-target="#modalpassbook" style="display:inline;">
+                                <img class="img-responsive img-circle" src="img/overlays/passbook.jpg" style="width:75px;height:75px;border-radius: 50%;">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+        <!--Intro Section-->
+        <section class="view intro-2 hm-gradient">
+            <div class="full-bg-img">
+                <div class="container flex-center">
+                    <div class="row flex-center pt-5 mt-3">
+                        <div class="col-md-6 text-center text-md-left margins">
+                            <div class="white-text">
+                                <h1 class="h1-responsive wow fadeInLeft" data-wow-delay="0.3s">Make purchases with our app </h1>
+                                    <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                    <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae iste.</h6>
+                                    <br>
+                                    <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s" data-toggle="modal" data-target="#loginsignupModal" >LogIn</a>
+                                    <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Download 
+                                        <i class="fa fa-android left right" aria-hidden="true"></i>
+                                        <i class="fa fa-apple left" aria-hidden="true"></i>
+                                        <i class="fa fa-windows" aria-hidden="true"></i>
+                                    </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 wow fadeInRight d-flex justify-content-center" data-wow-delay="0.3s">
+                            <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/iphone-admin.png" alt="" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+    </header>
+    <!--Main Navigation-->
+
+  <div class="row" style="margin-top:5%;margin-left:0px;margin-right:0px;display:none">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="display:none;">
+        <div class="md-form">
+            <!-- <input type="text" id="placename" class="form-control"> -->
+            <label for="form1" class=""></label>
+        </div>
+        
+        <div id="googlemaps" style="display:none"></div>
+        <div class="container" style="position:relative;bottom:52%;display:none;">
+
+        </div>
+    </div>
+</div>  
+
+
+    <!--SPECIFICATION LAYOUT STARTS HERE............  -->
+               
+    <!--Section: Features v.3-->
+    <div class="container">
+        <section class="section feature-box">
+
+            <!--Section heading-->
+            <h1 class="section-heading pt-4 text-center">Why is it so great?</h1>
+            <!--Section description-->
+            <p class="section-description lead grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam. Quia, minima?</p>
+
+            <!--Grid row-->
+            <div class="row features-small pt-2">
+
+                <!--Grid column-->
+                <div class="col-lg-5 mb-r center-on-small-only wow fadeInLeft" data-wow-delay="0.3s">
+                    <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/ipad-portfolio2.png" alt="" class="img-fluid z-depth-0">
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-7 wow fadeInRight" data-wow-delay="0.3s">
+
+                    <!--Grid row-->
+                    <div class="row pb-3">
+                        <div class="col-2 col-md-1">
+                            <i class="fa fa-bank blue-text"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5 class="feature-title">Safety</h5>
+                            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.</p>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row pb-3">
+                        <div class="col-2 col-md-1">
+                            <i class="fa fa-code blue-text"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5 class="feature-title">Technology</h5>
+                            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.</p>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row pb-3">
+                        <div class="col-2 col-md-1">
+                            <i class="fa fa-money blue-text"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5 class="feature-title">Finance</h5>
+                            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.</p>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row pb-3">
+                        <div class="col-2 col-md-1">
+                            <i class="fa fa-money blue-text"></i>
+                        </div>
+                        <div class="col-10">
+                            <h5 class="feature-title">Services</h5>
+                            <img src="img/svg/maestro.png">
+                            <img src="img/svg/point-of-service.png">
+                            <img src="img/svg/send.png">
+                            <img src="img/svg/transfer.png">
+                            <img src="img/svg/agreement.png">
+                            <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.</p>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+    </div>
+    <!--Section: Features v.3-->
+                
+    <!--SPECIFICATION LAYOUT ENDS HERE............  -->
+
+
+    <!--TESTIMONIAL SECTION GOES HERE.....  -->
+
+      
+<!--Section: Testimonials v.2-->
+<section class="section text-center pb-5">
+
+    <!--Section heading-->
+    <h1 class="section-heading h1 pt-4">Testimonials</h1>
+    <!--Section description-->
+
+    <!--Carousel Wrapper-->
+    <div class="container">
+    <div id="carousel-example-1" class="carousel no-flex testimonial-carousel slide carousel-fade wow slideInUp" data-wow-delay="0.3s" data-ride="carousel" data-interval="false">
+
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+            <!--First slide-->
+            <div class="carousel-item active">
+
+                <div class="testimonial">
+                    <!--Avatar-->
+                    <div class="avatar">
+
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg" class="rounded-circle img-fluid" alt="First sample avatar image">
+
+                    </div>
+                    <!--Content-->
+                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore cum accusamus eveniet molestias voluptatum inventore laboriosam labore sit, aspernatur praesentium iste impedit quidem dolor veniam.</p>
+
+                    <h4>Ankita Jain</h4>
+                    <h6>Founder at ET Company</h6>
+
+                    <!--Review-->
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star-half-full"> </i>
+                </div>
+
+            </div>
+            <!--First slide-->
+
+            <!--Second slide-->
+            <div class="carousel-item">
+
+                <div class="testimonial">
+                    <!--Avatar-->
+                    <div class="avatar">
+
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" class="rounded-circle img-fluid" alt="Second sample avatar image">
+
+                    </div>
+                    <!--Content-->
+                    <p><i class="fa fa-quote-left"></i> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore. </p>
+
+                    <h4>Maria Kate</h4>
+                    <h6>Photographer at Studio LA</h6>
+
+                    <!--Review-->
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                </div>
+
+            </div>
+            <!--Second slide-->
+
+            <!--Third slide-->
+            <div class="carousel-item">
+
+                <div class="testimonial">
+                    <!--Avatar-->
+                    <div class="avatar">
+
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" class="rounded-circle img-fluid" alt="Third sample avatar image">
+
+                    </div>
+                    <!--Content-->
+                    <p><i class="fa fa-quote-left"></i> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+
+                    <h4>John Doe</h4>
+                    <h6>Front-end Developer in NY</h6>
+
+                    <!--Review-->
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star"> </i>
+                    <i class="fa fa-star-o"> </i>
+                </div>
+
+            </div>
+            <!--Third slide-->
+
+        </div>
+        <!--Slides-->
+
+        <!--Controls-->
+        <a class="carousel-item-prev left carousel-control" href="#carousel-example-1" role="button" data-slide="prev">
+            <span class="icon-prev" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-item-next right carousel-control" href="#carousel-example-1" role="button" data-slide="next">
+            <span class="icon-next" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!--Controls-->
+
+    </div>
+    </div>
+    <!--Carousel Wrapper-->
+
+</section>
+<!--Section: Testimonials v.2-->
+            
+
+    <!--TESTIMONIAL SECTION ENDS HERE.....  -->
+
+
+
+    
+
+
+    <!--FOOTER SECTION GOES HERE........  -->
+                    
+    <!--Footer-->
+    <footer class="page-footer center-on-small-only unique-color-dark pt-0">
+
+        <div style="background-color: #6351ce;">
+            <div class="container">
+                <!--Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h6 class="mb-0 white-text">Get connected with us on social networks!</h6>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--Facebook-->
+                        <a class="icons-sm fb-ic ml-0"><i class="fa fa-facebook white-text mr-lg-4"> </i></a>
+                        <!--Twitter-->
+                        <a class="icons-sm tw-ic"><i class="fa fa-twitter white-text mr-lg-4"> </i></a>
+                        <!--Google +-->
+                        <a class="icons-sm gplus-ic"><i class="fa fa-google-plus white-text mr-lg-4"> </i></a>
+                        <!--Linkedin-->
+                        <a class="icons-sm li-ic"><i class="fa fa-linkedin white-text mr-lg-4"> </i></a>
+                        <!--Instagram-->
+                        <a class="icons-sm ins-ic"><i class="fa fa-instagram white-text mr-lg-4"> </i></a>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+            </div>
+        </div>
+
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
+            <div class="row mt-3">
+
+                <!--First column-->
+                <div class="col-md-3 col-lg-4 col-xl-3 mb-r">
+                    <h6 class="title font-bold"><strong>Company name</strong></h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit
+                        amet, consectetur adipisicing elit.</p>
+                </div>
+                <!--/.First column-->
+
+                <!--Second column-->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-r">
+                    <h6 class="title font-bold"><strong>Products</strong></h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><a href="#!" >MDBootstrap</a></p>
+                    <p><a href="#!">MDWordPress</a></p>
+                    <p><a href="#!">BrandFlow</a></p>
+                    <p><a href="#!">Bootstrap Angular</a></p>
+                </div>
+                <!--/.Second column-->
+
+                <!--Third column-->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-r">
+                    <h6 class="title font-bold"><strong>Useful links</strong></h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><a href="#!" data-toggle="modal" data-target="#centralModalInfo">Contact Us</a></p>
+                    <p><a href="#!" data-toggle="modal" data-target="#exampleModal">Team</a></p>
+                    <p><a href="#!">Locations</a></p>
+                    <p><a href="#!">Help</a></p>
+                </div>
+                <!--/.Third column-->
+
+                <!--Fourth column-->
+                <div class="col-md-4 col-lg-3 col-xl-3">
+                    <h6 class="title font-bold"><strong>Contact</strong></h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><i class="fa fa-home mr-3" ></i> New York, NY 10012, US</p>
+                    <p><i class="fa fa-envelope mr-3"></i> info@example.com</p>
+                    <p><i class="fa fa-phone mr-3"></i> + 01 234 567 88</p>
+                    <p><i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+                </div>
+                <!--/.Fourth column-->
+
+            </div>
+        </div>
+        <!--/.Footer Links-->
+
+        <!-- Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2017 Copyright: <a href="https://www.MDBootstrap.com"><strong> MDBootstrap.com</strong></a>
+            </div>
+        </div>
+        <!--/.Copyright -->
+        
+    </footer>
+    <!--/.Footer-->
+          
+    <!--FOOTER SECTION ENDS HERE......  -->
+    
+
+    <!--BUTTOON FOR GEO INFO FOR THE USER GOES HERE....... -->
+    <button class="btn blue-gradient info_button" data-toggle="modal" data-target="#centralModalWarning"><a class="btn-floating btn-lg purple-gradient"><i class="fa fa-bolt"></i></a></button>
+    <!--BUTTON FOR THE GEO INFO FOR THE USER ENDS HERE.....  -->
+    </homepage>
+
+
+
+    <!--CONTACTUS PAGE GOES HERE........  -->
+     <!-- Central Modal Medium Info -->
+    <div class="modal fade"  id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-info modal-lg" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Body-->
+                <div class="modal-body" style="padding:0px;">
+                    
+<!--Section: Contact v.3-->
+<section class="section mb-5 pt-5" style="padding-top:0px !important;padding-bottom:0px !important;margin-bottom:0px !important;">
+
+    <!--Grid row-->
+    <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-12">
+
+            <!--Form with header-->
+            <div class="card">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="card-body form">
+                            <!--Header-->
+                            <div class="formHeader mb-1 pt-3">
+                                <h3><i class="fa fa-envelope"></i> Write to us:</h3>
+                            </div>
+
+                            <br>
+
+                            <form id="contactusForm" method="POST" onsubmit="contactusValidate()">
+                                <!--Grid row-->
+                                <div class="row">
+                                    <div class="col-md-12 form-inline" style="margin-bottom:30px;">
+                                        <div class="form-group">
+                                            <input name="suggestion" type="radio" id="suggestion" checked="checked">
+                                            <label for="suggestion">Suggestion</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input name="feedback" type="radio" id="feedback">
+                                            <label for="feedback">Feedback</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input name="help" type="radio" id="help">
+                                            <label for="help">Option 3</label>
+                                        </div>
+                                    </div>
+                                    <!--Grid column-->
+                                    <div class="col-md-6">
+                                        <div class="md-form">
+                                            <div class="md-form">
+                                                <input type="text"  placeholder="Enter your Name" id="contactus_name" name="contactus_name" class="form-control" value="Abhay" required readonly>
+                                                <!-- <label for="form-contact-name" class="">Your name</label> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Grid column-->
+
+                                    <!--Grid column-->
+                                    <div class="col-md-6">
+                                        <div class="md-form">
+                                            <div class="md-form">
+                                                <input type="text"  placeholder="Enter your Email" id="contactus_email" name="contactus_email" class="form-control" value="abhya@gmail.com" required readonly>
+                                                <!-- <label for="form-contact-email" class="">Your email</label> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Grid column-->
+
+                                </div>
+                                <!--Grid row-->
+
+                                <!--Grid row-->
+                                <div class="row">
+
+                                    <!--Grid column-->
+                                    <div class="col-md-12">
+                                        <div class="md-form">
+                                            <div class="md-form">
+                                            <!--Blue select-->
+                                            <select class="browser-default" id="contactus_title" style="width:100%;">
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
+                                                <option value="4">Option 4</option>
+                                                <option value="5">Option 5</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Grid column-->
+                                </div>
+                                <!--Grid row-->
+
+                                <!--Grid row-->
+                                <div class="row">
+                                    <!--Grid column-->
+                                    <div class="col-md-12">
+                                        <div class="md-form">
+                                            <textarea type="text"  placeholder="Enter details" id="contactus_detail" name="contactus_detail" max="120" class="md-textarea" onkeydown="spacechk(this.id,event)" required></textarea>
+                                        </div>
+                                    </div>
+                                    <!--Grid column-->
+                                </div>
+                                <!--Grid row-->
+
+                                <div class="row">
+
+                                    <!--Grid column-->
+                                    <div class="col-md-12">
+
+                                        <div class="md-form">
+                                            <button type="submit" class="btn btn-primary" style="width:100%;" >Submit</button>
+                                        </div>
+
+                                    </div>
+                                    <!--Grid column-->
+
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5" style="background:royalblue;color:white;">
+                        <div class="card-body contact text-center">
+                            <div class="container">
+                                <div class="mb-5">
+                                    <h3>Contact information</h3>
+                                </div>
+
+                                <div clas="col-xs-12 xol-sm-12 col-md-12 col-lg-12">
+                                    <div clas="col-xs-1 xol-sm-1 col-md-1 col-lg-1">
+                                        <i class="fa fa-map-marker"></i>
+                                    </div>
+                                    <div clas="col-xs-11 xol-sm-11 col-md-11 col-lg-11">
+                                        <p>San Francisco, CA 94126, USA</p>
+                                    </div>
+                                </div>
+
+                                <div clas="col-xs-12 xol-sm-12 col-md-12 col-lg-12">
+                                    <div clas="col-xs-1 xol-sm-1 col-md-1 col-lg-1">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <div clas="col-xs-11 xol-sm-11 col-md-11 col-lg-11">
+                                         <p>+ 01 234 567 89</p>
+                                    </div>
+                                </div>
+
+                                <div clas="col-xs-12 xol-sm-12 col-md-12 col-lg-12">
+                                    <div clas="col-xs-1 xol-sm-1 col-md-1 col-lg-1">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <div clas="col-xs-11 xol-sm-11 col-md-11 col-lg-11">
+                                        <p>contact@example.com</p>
+                                    </div>
+                                </div>
+                                <hr class="hr-light mb-4 mt-4">
+                                <ul class="inline-ul text-center list-unstyled">
+                                    <li><a class="icons-sm tw-ic"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a class="icons-sm li-ic"><i class="fa fa-linkedin"> </i></a></li>
+                                    <li><a class="icons-sm ins-ic"><i class="fa fa-instagram"> </i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+            <!--/Form with header-->
+
+        </div>
+        <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+</section>
+<!--Section: Contact v.3-->
+            
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!-- Central Modal Medium Info-->
+    
+    <!--CONTACT US PAGE ENDS HERE.......  -->
+
+
+
+
+    <!-- LOGIN FORM GOES HERE  -->
+    <!-- Modal: modalQuickView -->
+<div class="modal fade" id="loginsignupModal" tabindex="-1" role="dialog" aria-labelledby="loginsignupModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <!--Carousel Wrapper-->
+                        <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox" style="height:575px;">
+                                <div class="carousel-item active">
+                                    <img src="http://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(23).jpg" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="http://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(24).jpg" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="http://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/img%20(25).jpg" alt="Third slide">
+                                </div>
+                            </div>
+                            <!--/.Slides-->
+
+                            <!--Thumbnails-->
+                            <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                            <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                            <!--/.Thumbnails-->
+
+                        </div>
+                        <!--/.Carousel Wrapper-->
+                    </div>
+                    <div class="col-lg-7"> 
+                         <ul class="nav nav-tabs nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#login" role="tab">LogIn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#signup" role="tab">SignUp</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panels -->
+                        <div class="tab-content card">
+                            <!--Panel 1-->
+                            <div class="tab-pane fade in show active" id="login" role="tabpanel">
+                                <div class="col-lg-12"  id="logindiv" >
+                                    <!-- <h2 class="h2-responsive product-name"><strong>Login</strong></h2> -->
+                                    <!-- <h4 class="h4-responsive"><span class="green-text"><strong>$49</strong></span> <span class="grey-text"><small><s>$89</s></small></span></h4> -->
+
+                                    <!--Accordion wrapper-->
+                                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <form method="POST" id="loginForm" onsubmit="loginValidate()">
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-envelope prefix"></i>
+                                                <input type="email" class="form-control"  id="loginEmail" name="loginEmail" placeholder="Registered Email (Compulsary)" onkeydown="spacechk(this.id,event)" required>
+                                                <!-- <label for="form30">Your email</label> -->
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-lock prefix"></i>
+                                                <input type="password" class="form-control"  id="loginpassword"  name="loginpassword" value="" placeholder="Password (Compulsary)" onkeydown="spacechk(this.id,event)" required >
+                                                <!-- <label for="form31">Your password</label> -->
+                                            </div>
+
+                                            <div class="text-center mt-2">
+                                                <button class="btn btn-info">Log in <i class="fa fa-sign-in ml-1"></i></button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--/.Accordion wrapper-->
+
+                                    <div class="card-body">
+                                        <div class="options text-center text-md-left mt-1">
+                                            <!-- <p>Not a member? <a href="#" onclick="signupdivevent()">Sign Up</a></p>
+                                            <p>Forgot <a href="#">Password?</a></p> -->
+                                        </div>
+                                        <div class="text-center">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                            <!--/.Panel 1-->
+                            <!--Panel 2-->
+                            <div class="tab-pane fade" id="signup" role="tabpanel">
+                                <!-- <div class="col-lg-7 " > -->
+                                <div class="col-lg-12" id="signupdiv"  >
+                                    <!-- <h2 class="h2-responsive product-name"><strong>SignUp</strong></h2> -->
+                                    <!-- <h4 class="h4-responsive"><span class="green-text"><strong>$49</strong></span> <span class="grey-text"><small><s>$89</s></small></span></h4> -->
+
+                                    <!--Accordion wrapper-->
+                                    <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                        <form method="POST" id="signupForm" onsubmit="signupValidate()">
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-envelope prefix"></i>
+                                                <input type="email" id="signupEmail" class="form-control" name="signupEmail" value="" placeholder="Your Email (Compulsary)" onclick="showinfo(this.id)" onkeydown="spacechk(this.id,event)" onkeyup="emailvalidate()" ondrop="return false;" onpaste="return false;" required>
+                                                <!-- <label for="signupEmail">Your email</label> -->
+                                                 <span class="emailmsg info" style="display:none;">Note: Enter a valid email as activation link will be send</span>
+                                                 <span class="msg error">* Not a valid email address</span>
+                                                 <span class="msg success">* A valid email address!</span> 
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-mobile-phone  prefix"></i>
+                                                <input type="number" id="signupMobile" class="form-control"  name="signupMobile" value=""  placeholder="Mobile No (Compulsary)" onclick="showinfo(this.id)"  onkeydown="spacechk(this.id,event)" onkeyup="mobileValidate()" maxlength="10" ondrop="return false;" onpaste="return false;" required>
+                                                 <span class="mobilemsg info" style="display:none;">Note: Enter a valid Mobile as OTP will be send</span>
+                                                <span class="mobilemsg mobileerror">* Not a valid email address</span>
+                                                <span class="mobilemsg mobilesuccess">* A valid email address!</span> 
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-lock prefix"></i>
+                                                <input type="password" id="signupPassword" class="form-control" name="signupPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" placeholder="Password (Compulsary)" onclick="showinfo(this.id)" onkeydown="spacechk(this.id,event)" onkeypress="passwordValidate(event)"  ondrop="return false;" onpaste="return false;"  required>
+                                                <input type="checkbox" id="passwordchkbox" onclick="showpassword(this.id)" style="width:5px;">Show Password
+                                                <span class="passwordmsg info" style="display:none;">Note: Password must contain atleast 1 Uppercase Character, 1 Lowercase character, 1 Number, Minimum 8 characters, Maximum 16 characters.  </span>
+                                                <!-- <label for="signupPassword">Your password</label> -->
+                                                <span id="error" style="color: Red; display: none">* Special Characters not allowed</span>
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-lock prefix"></i>
+                                                <input type="password" id="signupConfirmpass" class="form-control" name="signupConfirmpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" value="" placeholder="Repeat Password (Compulsary)" onclick="showinfo(this.id)" onkeydown="spacechk(this.id,event)" ondrop="return false;" onpaste="return false;" required>
+                                                <input type="checkbox" id="conformpasswordchkbox" onclick="confrmshowpassword(this.id)" style="width:5px;">Show Password
+                                                <span class="confirmpasswordmsg info" style="display:none;">Note: Same as Password. Password must contain atleast 1 Uppercase Character, 1 Lowercase character, 1 Number, Minimum 8 characters, Maximum 16 characters.  </span>
+                                                <span class="repeatpssserror info" style="display:none;color: Red;">Note: Password must be same.  </span>
+                                                <!-- <label for="signupConfirmpass">Repeat password</label> -->
+                                                <span id="error" style="color: Red; display: none">* Special Characters not allowed</span>
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-lock prefix"></i>
+                                                <input type="text" id="signupReferal" class="form-control" name="signupReferal" value="" placeholder="Referal Code (Optional)" onkeydown="spacechk(this.id,event)" ondrop="return false;" onpaste="return false;"> 
+                                                <!-- <label for="signupReferal">Referal code(Optional)</label> -->
+                                            </div>
+
+                                            <div class="text-center mt-2">
+                                                <button class="btn btn-info">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--/.Accordion wrapper-->
+
+                                    <!-- Add to Cart -->
+                                    <div class="card-body">
+                                        <div class="options text-center text-md-left mt-1">
+                                            <!-- <p>Already a member?<a href="#" onclick="logindivevent()" >Login</a></p> -->
+                                        </div> 
+                                        <div class="text-center">
+
+                                            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                                            <!-- <button class="btn btn-primary">Add to cart<i class="fa fa-cart-plus ml-2" aria-hidden="true"></i></button> -->
+                                        </div>
+                                    </div>
+                                    <!-- /.Add to Cart -->
+                                </div>
+                                
+                            </div>
+                            <!--/.Panel 2-->
+                        </div>
+                    <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal: modalQuickView -->
+    <!-- LOGIN FORM ENDS HERE  -->
+
+
+
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade top" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img class="wow fadeInLeft" data-wow-delay="0.3s"  src="img/overlays/ankita.png" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                    <!-- <img src="img/overlays/ankita.jpg" style="float:left;border-radius:50%;width:25px;height:25px;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal8"> -->
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">hey!!!! guys and girls this is ankita jain</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">you know what ever your are looking its because of me....</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">everyone here is so dumb in terms of looks and feel that's y i am FRONTEND DEVELOPER..</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal8">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal2">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+                  
+
+<!-- Modal -->
+<div class="modal fade bottom" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img class="wow fadeInLeft" data-wow-delay="0.3s" src="img/overlays/girish.png" style="width:100%;">
+                                        <!-- <img src="img/overlays/Girish.jpeg" style="float:left;border-radius:50%;width:150px;height:150px;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal8"> -->
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-delay="0.3s">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">ankita i will not let you take all the credit</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">dont forget i am the one smart and dashing guy because of which you used to have those awsome ideas and design</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">hey!! hiii myself girish the tom of my office and also the FRONTEND GUY....</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal1">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal3">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade top" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img  class="wow fadeInLeft" data-wow-delay="0.3s" src="img/overlays/om.png" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 wow fadeInLeft" data-wow-delay="0.3s">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">how can you forget me guys</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">i am your backbone </p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">hey!! hiii myself om the bob and the BACKEND DEVELOPER......</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal2">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal4">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+      
+
+<!-- Modal -->
+<div class="modal fade right" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img class="wow fadeInLeft" data-wow-delay="0.3s" src="img/overlays/praveen.png" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 wow fadeInLeft" data-wow-delay="0.3s">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">wanakkam</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">myself praveen a BACKEND DEVELOPER......</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal3">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal5">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade top" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img class="wow fadeInLeft" data-wow-delay="0.3s" src="img/overlays/navneet.png" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 wow fadeInLeft" data-wow-delay="0.3s">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">wanna see us</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">pick your phone and just download mera wallet app we will chat there web is of no use...</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;"> hiii myself navneet the ANDROID DEVELOPER......</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal4">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal6">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade right" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img class="wow fadeInLeft" data-wow-delay="0.3s" src="img/overlays/aman.png" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">wait wait wait navneet i am also in your team..</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;"> hiii myself aman the ANDROID DEVELOPER......</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal5">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal7">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade right" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img src="img/overlays/priya.gif" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">iitu bittu jim batuta....</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">i i i dekho OPERATIONAL AND IT Manager aae....</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">Hey!!! hello everyone myself Miss Priya. its all my thought of mera wallet</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal6">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal8">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade right" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="background:transparent !important;">
+            <!-- <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <img src="img/overlays/raj.png" style="width:100%;">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">hahahahaah....</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">see these guys they are in a myth that they are super cool but the reality is that there ideas are of no use with me... </p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">as i am the sales head</p>
+                    <p style="font-family:URW Chancery L, cursive;color:white;font-size: xx-large;">Mr.akash</p>
+                    <img src="img/svg/previous.png" style="float:left;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal7">
+                    <img src="img/svg/next.png" style="float:right;" onclick="chk()" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal">
+                </div>
+                </div>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    <!-- GEOINFO MODAL GOES HERE........ -->
+    <!-- Central Modal Medium Warning -->
+    <div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-warning modal-full-height" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <p class="heading lead">Geo Info</p>
+    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+    
+                <!--Body-->
+                <div class="modal-body geoinfobody">
+                    <div class="text-center">
+                        <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescapital">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescertainty">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescity">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescityid">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescode">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescountry">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescurrency">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytescurrencycode">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesdma">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesforwarderfor">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesfqcn">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesinternet">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesipaddress">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobyteslatitude">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobyteslongitude">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobyteslocationcode">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesmapreference">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesnationalityplural">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesnationalitysingular">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytespopulation">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesregion">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesregionlocationcode">
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="geobytesremoteip">
+                        </div>
+                        
+                    </div>
+                </div>
+    
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                    <!-- <a type="button" class="btn btn-primary-modal">Get it now <i class="fa fa-diamond ml-1"></i></a> -->
+                    <a type="button" class="btn btn-outline-secondary-modal waves-effect" data-dismiss="modal">Thanks</a>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!-- Central Modal Medium Warning-->
+    <!-- GEOINFO MODAL ENDS HERE........ -->
+
+    
+                                                
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/contactus.js"></script>
+    <script src="js/geoinfo.js"></script>
+    <script src="js/map.js"></script>
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+        <script>
+        new WOW().init();
+</script>
+
+</body>
+
+</html>

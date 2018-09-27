@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="en" class="full-height">
+                
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Mera Wallet</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <!-- <link href="css/index.css" rel="stylesheet">  -->
+    <style>
+    .navbar{
+        margin-bottom:1%;
+    }
+    body{
+        overflow: auto;
+    }e
+    ::-webkit-scrollbar { 
+    display: none; 
+}
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+
+.admin_topDiv{
+    margin:4%;
+}
+.socialmedia_Div{
+    width:100%;
+    /* height:200px; */
+    border-radius:2%;
+    padding:10px;
+
+}
+.topdiv_container{
+    box-shadow: 1px 10px 8px black;
+    padding: 10px;
+}
+.ccc {
+  background:#212531;
+  background: linear-gradient(to right bottom, #2f3441 50%, #212531 50%);
+}
+    </style>
+    <body style="overflow:auto;">
+
+<!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark indigo">
+
+            <!-- Navbar brand -->
+            <a class="navbar-brand" href="#">ADMIN PANEL</a>
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Links -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <b><a class="nav-link" id="nav-link" href="#"></a></b>
+                    </li>
+                </ul>
+                <!-- DISPLAY TIME -->
+                <form class="form-inline">
+                    <input class="form-control mr-sm-1" type="text" placeholder="Time" name="time" id="time" aria-label="time" readonly>
+                    <input class="form-control mr-sm-1" type="text" placeholder="Date" name="date" id="date" aria-label="date" readonly>
+                </form>
+                <!-- Links -->
+            </div>
+            <!-- Collapsible content -->
+
+        </nav>
+        <!--/.Navbar-->
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 topdiv_container ">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 admin_topDiv" style="min-height:60px;background-color: #43cea2 !important; /* fallback for old browsers */
+                            background: -webkit-linear-gradient(to right, #43cea2, #185a9d) !important; /* Chrome 10-25, Safari 5.1-6 */
+                            background: linear-gradient(to right, #43cea2, #185a9d) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ ">
+                            <h4 style="color:white;text-align:center;padding:5%"><img src="img/svg/download.png"> 20 <b>Downloads</b></h4>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 admin_topDiv" style="min-height:60px;background-color: #00C851 !important; /* fallback for old browsers */
+                            background: -webkit-linear-gradient(to right, #00C851, #007E33) !important; /* Chrome 10-25, Safari 5.1-6 */
+                            background: linear-gradient(to right, #00C851, #007E33) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ ">
+                            <h4 style="color:white;text-align:center;padding:5%"><img src="img/svg/online2.png"> 30 <b>Online</b></h4>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 admin_topDiv" style="min-height:60px; background-color: #b71c1c !important; /* fallback for old browsers */
+                            background: -webkit-linear-gradient(to right, #b71c1c, #d50000) !important; /* Chrome 10-25, Safari 5.1-6 */
+                            background: linear-gradient(to right, #b71c1c, #d50000) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
+                            <h4 style="color:white;text-align:center;padding:5%"><img src="img/svg/offline.png"> 50 <b>Offline</b></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 topdiv_container" style="margin-top:15px;">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 " style="margin-top:15px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 socialmedia_Div  " style="min-height:60px;border: 15px solid #4285F4;color:black;background:transparent;
+                                background: linear-gradient(to right bottom, transparent 50%,#bbdefb 50%);">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;"><img src="img/svg/facebook.png"></h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#4285F4">56</h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#4285F4;"><b>Likes</b></h4>
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-top:15px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 socialmedia_Div " style="min-height:60px;border: 15px solid #d81b60;background:transparent;
+                                background: linear-gradient(to right bottom, transparent 50%,#f8bbd0 50%); ">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;"><img src="img/svg/instagram.png"></h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#d81b60;">56</h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#d81b60;"><b>Likes</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-top:15px;;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 socialmedia_Div " style="min-height:60px;border: 15px solid #4285F4;background:transparent;
+                                background: linear-gradient(to right bottom, transparent 50%,#bbdefb 50%);">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;"><img src="img/svg/twitter.png"></h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#4285F4;">56 </h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#4285F4;"><b>Likes</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-top:15px;;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 socialmedia_Div ccc" style="min-height:60px;border:15px solid #0d47a1;background:transparent;
+                                background: linear-gradient(to right bottom, transparent 50%,#bbdefb 50%);">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;"><img src="img/svg/linkedin.png"></h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#0d47a1;">56</h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#0d47a1;"><b>Likes</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-top:15px;;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 socialmedia_Div " style="min-height:60px;border:15px solid #FFC91B;background:transparent;
+                                background: linear-gradient(to right bottom, transparent 50%,#e6ee9c 50%);">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;"><img src="img/svg/snapchat.png"></h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#FFC91B;">56</h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#FFC91B;"><b>Likes</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="margin-top:15px;;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 socialmedia_Div " style="min-height:60px;border:15px solid #0d47a1;background:transparent;
+                                background: linear-gradient(to right bottom, transparent 50%,#bbdefb 50%);">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;"><img src="img/svg/linkedin.png"></h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#0d47a1;">56</h4>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <h4 style="color:white;text-align:center;padding:5%;color:#0d47a1;"><b>Likes</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width:500px;height:500px;">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
+                
+                                                
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/contactus.js"></script>
+    <!--line chart scripts starts here........  -->
+    <script src="js/charts/linechart.js"></script>
+    <script src="js/charts/radarchart.js"></script>
+    <script src="js/charts/barchart.js"></script>
+    <script src="js/charts/polarareachart.js"></script>
+    <script src="js/charts/piechart.js"></script>
+    <script src="js/charts/doughnut.js"></script>
+    <!-- <script src="js/charts/doughnut.js"></script> -->
+
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script>
+        new WOW().init();
+        var i = 0;
+        var txt = 'Welcome President ';
+        var speed = 150;
+
+        function typeWriter() {
+        if (i < txt.length) {
+            document.getElementById("nav-link").innerHTML += txt.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+        }
+        }
+        typeWriter();
+
+        var myVar = setInterval(myTimer, 1000);
+
+        function myTimer() {
+            var tym = new Date();
+            document.getElementById("time").value = tym.toLocaleTimeString();
+        }
+
+        var dte = new Date();
+        var n = dte.toDateString();
+        document.getElementById("date").value = n;
+    </script>
+
+</body>
+
+</html>

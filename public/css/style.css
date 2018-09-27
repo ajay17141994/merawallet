@@ -1,0 +1,72 @@
+/* Your custom styles */
+
+#googlemaps{
+    width:100%;
+    height:500px;
+}
+.info_button{
+    border-radius:50%;
+    padding: 0rem 0rem;
+    height:55px;
+    width:55px;
+    position:fixed;
+    top:30%;
+    right:0px;
+    background-color: red !important; /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to left, #43cea2, #185a9d) !important;  Chrome 10-25, Safari 5.1-6  */
+    /* background: linear-gradient(to left, #43cea2, #185a9d) !important;  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+  */
+}
+.geoinfobody{
+    overflow-y: scroll;
+    /* overflow: scroll; */
+}
+.geoinfodiv{
+    text-align: left;
+}
+.supportsearch_option{
+    min-height: 75px;
+    border: 1px solid black;
+    box-shadow: 0px 14px 8px black;
+    text-align: right;
+    background: cornflowerblue;
+}
+.searchCondition_row{
+    margin-top:5%;
+}
+ .cd-single-point {
+  position: absolute;
+  list-style-type: none;
+  left: 20px;
+  top: 0px;
+}
+
+.cd-single-point>a {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #0079ff;
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    -o-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+
+.cd-single-point::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  animation: cd-pulse 2s infinite;
+}
+ 
+@keyframes cd-pulse
+{
+0%  {box-shadow:0 0 0 0 #0079ff}
+100%{box-shadow:0 0 0 20px rgba(255,150,44,0)}
+}
